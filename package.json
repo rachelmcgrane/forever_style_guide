@@ -1,0 +1,19 @@
+{
+  "name": "forever_style_guide_new",
+  "version": "1.0.0",
+  "description": "A set of CSS files to use in FOREVER applications",
+  "main": "assets/stylesheets/main.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rachelmcgrane/forever_style_guide.git"
+  },
+  "author": "FOREVER, Inc.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rachelmcgrane/forever_style_guide/issues"
+  },
+  "homepage": "https://github.com/rachelmcgrane/forever_style_guide#readme"
+}
