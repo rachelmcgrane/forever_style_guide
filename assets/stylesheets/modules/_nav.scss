@@ -1,0 +1,149 @@
+$offcanvas-width: 270px;
+$offcanvas-padding: 10px;
+$nav-bg-color: color('gray-700');
+
+$nav-li-a-padding-base: 4px;
+$nav-li-a-padding-right-desktop: 20px;
+$nav-li-a-padding-right-md_to_lg: 14px;
+$nav-li-a-padding-right-lg: 16px;
+
+@mixin nav-border($sides...) {
+  @each $side in $sides {
+    border-#{$side}: 1px solid color('gray-400');
+  }
+}
+
+// Basic styles - A lot of overriding Bootstrap defaults
+.navbar-toggle {
+  @media (max-width: $grid-float-breakpoint-max) {
+    display: block;
+  }
+}
+.navbar-brand {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  margin: auto;
+  padding: $padding-xs-vertical 0 0;
+  height: $header-height;
+  text-align: center;
+
+  .navbar-brand-logo-xs {
+    display: none;
+  }
+
+  @media (max-width: $minimum-application-width-xs-max) {
+    padding-top: 0;
+    padding-right: $header-height;
+    padding-left: $header-height;
+
+    .navbar-brand-logo-xs {
+      display: block;
+      height: 100%;
+    }
+    .navbar-brand-logo {
+      display: none;
+    }
+  }
+}
+.navbar {
+  min-height: $header-height;
+  border-radius: 0;
+  border: none;
+  @extend %card-shadow;
+
+  .nav.navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    @media (max-width: $grid-float-breakpoint-max) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    > li > a {
+      height: $header-height;
+      padding: $offcanvas-padding; /* bootstrap override */
+      color: color('gray-400');
+      font-size: $font-size-100;
+      font-weight: $font-weight-bold;
+      font-family: $font-face-gotham;
+      text-transform: uppercase;
+
+      @media (max-width: $grid-float-breakpoint-max) {
+        padding-top: $offcanvas-padding;
+        font-size: $font-size-large;
+        @include nav-border(top);
+        border-color: color('gray-600')
+      }
+      @media (min-width: $grid-float-breakpoint-max) {
+        position: relative;
+        color: color('gray-600');
+      }
+      @media (min-width: $grid-float-breakpoint-max) and (max-width: $screen-md_to_lg) {
+        padding-left: $nav-li-a-padding-base;
+        padding-right: $nav-li-a-padding-base;
+      }
+      @media (min-width: $screen-md_to_lg) and (max-width: $screen-lg-min) {
+        padding-left: $nav-li-a-padding-base * 2;
+        padding-right: $nav-li-a-padding-base * 2;
+      }
+      &:hover {
+        @media (min-width: $grid-float-breakpoint-max) {
+          background-color: color('gray-300');
+        }
+      }
+      &.dropdown-toggle {
+        @media (min-width: $grid-float-breakpoint) {
+          padding-right: $nav-li-a-padding-right-desktop;
+        }
+        @media (min-width: $grid-float-breakpoint) and (max-width: $screen-md_to_lg) {
+          padding-left: $nav-li-a-padding-base;
+          padding-right: $nav-li-a-padding-right-md_to_lg;
+        }
+        @media (min-width: $screen-md_to_lg) and (max-width: $screen-lg) {
+          padding-left: $nav-li-a-padding-base + 2;
+          padding-right: $nav-li-a-padding-right-lg;
+        }
+      }
+    }
+    .dropdown.open > .dropdown-toggle {
+      color: color('white');
+
+      @media (min-width: $grid-float-breakpoint) {
+        color: color('gray-400');
+        background-color: $nav-bg-color;
+      }
+    }
+    > .active > a {
+      background-color: transparent;
+
+      &:hover,
+      &:focus {
+        @media (max-width: $grid-float-breakpoint-max) {
+          color: color('gray-400');
+        }
+      }
+    }
+    &.navbar-right {
+      margin-right: 0;
+    }
+  }
+}
+
+.navbar-account-signed_out_btn {
+  position: absolute;
+  width: $offcanvas-width - ($offcanvas-padding * 2) - 5; // 5 = .dropdown-menu-nav padding-left
+  left: $offcanvas-padding + 5;
+  margin-top: $offcanvas-padding;
+  margin-bottom: $offcanvas-padding;
+
+  &.is_fixed_bottom {
+    bottom: 10px;
+    margin-bottom: 0;
+  }
+  .btn-action-icon {
+    margin-top: 2px;
+  }
+}

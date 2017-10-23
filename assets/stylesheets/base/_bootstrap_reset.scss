@@ -1,0 +1,19 @@
+html, body {
+  width: 100%;
+  font-family: $font-face-regular;
+  background-color: $color-background;
+  overflow-y: auto;
+}
+
+.style-guide {
+  padding-top: $header-height;
+}
+.nav-pills > li > a {
+  border-radius: 0;
+}
+
+// make all images responsive by default
+img {
+  max-width: 100%;
+  margin: 0 auto;
+}

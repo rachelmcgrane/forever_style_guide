@@ -1,0 +1,68 @@
+// Layout utility for applying padding to containers
+// TODO extend these into more robust modules ex. l-padded l-padded-horizontal etc etc
+.l-padded {
+  padding: 20px;
+
+  @media (min-width: $screen-md-min) {
+    padding: 40px;
+  }
+}
+
+.l-padded-thick {
+  padding: 40px;
+
+  @media (min-width: $screen-md-min) {
+    padding: 60px;
+  }
+}
+
+.l-padded-thin {
+  padding: 10px;
+
+  @media (min-width: $screen-md-min) {
+    padding: 20px;
+  }
+}
+
+// Create standard rhythm for vertical content spacing
+.l-section {
+  margin-top: 40px;
+
+  @media (max-width: $screen-sm-max) {
+    margin-top: 20px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: 10px;
+  }
+}
+
+.l-section-close {
+  margin-top: 20px;
+
+  @media (max-width: $screen-sm-max) {
+    margin-top: 10px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: 0px;
+  }
+}
+
+.l-section-far {
+  margin-top: 60px;
+
+  @media (max-width: $screen-sm-max) {
+    margin-top: 40px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: 20px;
+  }
+}
+
+// Layout utility for unpadded bootstrap columns ex. class="row no-gutter"
+.no-gutter > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0;
+}

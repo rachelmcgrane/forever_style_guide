@@ -1,0 +1,81 @@
+/* =colors-utils
+
+Sass functions and color related variables beyond standard color declarations
+---------------------------------------------------------------------------- */
+
+// map for all color declarations
+$colors: () !default;
+
+// map for only colorified colors
+$core_colors: () !default;
+
+// pre-defined variations for easy consistent adjustments across future color variation tweaks
+$variations: (
+  light: (
+    function: lighten,
+    parameters: 15%
+  ),
+  dark: (
+    function: darken,
+    parameters: 10%
+  )
+);
+
+// appends colors to master color list
+@function set_color($id, $color, $core: false) {
+  $colors: map-merge($colors, ($id: $color)) !global; // adds color declaration to global $colors map
+
+  @if $core {
+    $core_colors: map-merge($core_colors, ($id: $color)) !global; // adds color declaration to global $core_colors map
+  }
+
+  @return $color;
+}
+
+// retrieves a color from the master color list
+@function get_color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}
+
+@function color-variation($color, $variation: false) {
+  // get $color variable:
+  $color: get_color($color);
+
+  @if $variation {
+    @if not map-has-key($variations, $variation) {
+      // variation is not in $variations
+      @error "Invalid $variation: `#{$variation}`.";
+    } @else {
+      // make it easier to deal with nested map
+      $this-variation: map-get($variations, $variation);
+      // $args = $function, $color
+      $args: join(map-get($this-variation, function), $color);
+      @if map-get($this-variation, parameters) {
+        // $args = $function, $colors, $parameters
+        $args: join($args, map-get($this-variation, parameters));
+      }
+      //@return $args;
+      @return call($args...);
+    }
+  }
+  // no $variation, just return $color
+  @return $color;
+}
+
+// alias for get_color
+@function color($key) {
+  @return get_color($key);
+}
+
+// generates dynamic of a provided color and registers them as unique colors
+@function colorify($id, $color) {
+  $base-color: set_color($id, $color, true);
+  @each $variation, $varation-args in $variations {
+    $variant-color: set_color('#{$id}-#{$variation}', color-variation($id, $variation));
+  }
+  @return $base-color;
+}

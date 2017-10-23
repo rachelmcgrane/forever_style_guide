@@ -1,0 +1,86 @@
+$checkbox_size: 20px;
+
+@mixin checkbox($background-color, $border-color) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $checkbox_size;
+  height: $checkbox_size;
+  background-color: $background-color;
+  border: 2px solid $border-color;
+  border-radius: $border-radius-large;
+  @include transition(border-color 0.2s ease-in-out, background-color 0.2s ease-in-out);
+}
+
+.checkbox-branded {
+  position: relative;
+  font-size: $font-size-default;
+
+  &.checkbox { // using added specificity of .checkbox to override bootstrap
+    display: inline-block;
+ 
+    label {
+      padding-left: $checkbox_size * 1.5;
+    }
+  }
+
+  label {
+    cursor: pointer;
+    padding-left: $checkbox_size * 0.75;
+
+    @media (max-width: $screen-md-min) {
+      line-height: $font-size-default; // helps labels that wrap to two lines
+    }
+
+    &:before {
+      @include checkbox($color-white, $color-gray-400);
+      content: '';
+    }
+    &:after {
+      @include checkbox($color-white, $color-gray-400);
+      content: '\f00c';
+      font-family: fontawesome;
+      color: $color-white;
+      padding-left: 1px; // horizontal alignment of check w/ in box
+      line-height: 17px; // vertical alignment of check w/ in box
+      opacity: 0;
+    }
+    &:hover::after {
+      border-color: $color-gray-500;
+      opacity: 1;
+    }
+
+    //start: for mars ui checkbox
+    //mars ui does not use or need a real checkbox, and instead simple adds a class to the  label for checked and disabled states
+    //need better treatment for disabled.
+    &.checked:after {
+      @include checkbox($color-primary, color('primary-dark'));
+      opacity: 1;
+    }
+    &.disabled {
+      cursor: not-allowed;
+    }
+    &.disabled:after {}
+    &.disabled.checked:after {
+      @include checkbox($color-gray-400, $color-gray-500);
+    }
+    //end: for mars ui checbox
+
+
+  } 
+
+  input[type=checkbox] {
+    visibility: hidden;
+
+    &:checked + label:after,
+    &:checked + .has-error label:after
+     {
+      @include checkbox($color-primary, color('primary-dark'));
+      opacity: 1;
+    }
+  }
+}
+.checkbox-branded-inline {
+  float: left;
+  margin-right: $checkbox_size * 1.5;
+}

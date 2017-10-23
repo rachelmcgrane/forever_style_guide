@@ -1,0 +1,130 @@
+* {
+  font-family: $font-face-regular;
+}
+
+/* Headers */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: color('text');
+}
+
+h1 {
+  font-family: $font-face-gotham;
+  font-weight: 500;
+  font-size: $font-size-700;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: $font-size-600;
+  }
+  @media (max-width: $screen-xs-max) {
+    font-size: $font-size-500;
+  }
+}
+h2 {
+  font-family: $font-face-gotham;
+  font-weight: 500;
+  font-size: $font-size-600;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: $font-size-500;
+  }
+  @media (max-width: $screen-xs-max) {
+    font-size: $font-size-400;
+  }
+}
+h3 {
+  font-family: $font-face-gotham;
+  font-weight: 500;
+  font-size: $font-size-500;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: $font-size-400;
+  }
+  @media (max-width: $screen-xs-max) {
+    font-size: $font-size-300;
+  }
+}
+h4 {
+  font-family: $font-face-gotham;
+  font-weight: 400;
+  font-size: $font-size-400;
+  @media (max-width: $screen-sm-max) {
+    font-size: $font-size-400;
+  }
+  @media (max-width: $screen-xs-max) {
+    font-size: $font-size-300;
+  }
+}
+h5 {
+  font-family: $font-face-gotham;
+  font-weight: 300;
+  font-size: $font-size-300;
+}
+h6 {
+  font-family: $font-face-gotham;
+  font-weight: 200;
+  font-size: $font-size-200;
+}
+p {
+  font-family: $font-face-regular;
+  font-size: $font-size-default;
+  line-height: 1.6;
+}
+small {
+  font-family: $font-face-regular;
+  font-size: $font-size-100;
+}
+b,
+strong {
+  font-family: $font-face-bold;
+}
+.page-title {
+  margin-top: 0;
+}
+.lead {
+  font-family: $font-face-gotham;
+  font-weight: 100;
+}
+a {
+  color: color('secondary');
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    color: color('secondary');
+  }
+}
+
+/* 
+  mixin for multiline ellipsization
+  http://hackingui.com/front-end/a-pure-css-solution-for-multiline-text-truncation/
+*/
+@mixin multi_line_ellipsis($lineHeight: 1.1em, $lineCount: 3, $bgColor: $color-gray-700) {
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  padding-right: 1em;
+
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
