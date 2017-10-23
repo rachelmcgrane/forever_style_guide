@@ -1,8 +1,8 @@
 {
-  "name": "forever_style_guide_new",
+  "name": "forever_style_guide",
   "version": "1.0.0",
   "description": "A set of CSS files to use in FOREVER applications",
-  "main": "assets/stylesheets/main.scss",
+  "main": "assets/stylesheets/forever_style_guide.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
